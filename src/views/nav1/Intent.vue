@@ -107,12 +107,24 @@ export default {
         }
       },
     methods:{
-        // 加载数据
+        // 加载本地数据
         makeData: function(){
             var temp = []
             for (var val in data) {
+                // console.log(val)
                 this.tableData.push(data[val])
             }
+        },
+        //加载服务器数据
+        makeSerData: function(){
+            this.$http.get('apis/getData').then(response => {
+                    for (var val in response.data) {
+                        // console.log(val)
+                        this.tableData.push(response.data[val])
+                    }
+                }, response => {
+                    console.log("error");
+                });    
         },
         // 删除数据
         handleDelete(index, row) {
@@ -120,6 +132,7 @@ export default {
 					type: 'warning'
 				}).then(()=>{
                     this.tableData.splice(index, 1);
+                    this.saveData()
                 }).catch(() => {
 
 				})
@@ -148,6 +161,7 @@ export default {
                         this.tableData.splice(this.index, 1, para);
                         // console.log(this.tableData)
                         this.$refs['editForm'].resetFields();
+                        this.saveData()
                     }).catch(() => {
 
 				    })
@@ -188,9 +202,18 @@ export default {
                 }
             })
         },
+        saveData:function() {
+            // console.log(this.tableData)
+            this.$http.post('apis/test', {data: this.tableData}).then(response => {
+                console.log(response.data);
+            }, response => {
+                console.log("error");
+            });
+        }
     },
     created(){
-        this.makeData()
+        // this.makeData()
+        this.makeSerData()
     },
     // updated(){
     //     console.log("updated")

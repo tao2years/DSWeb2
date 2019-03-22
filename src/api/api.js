@@ -16,4 +16,22 @@ export const editUser = params => { return axios.get(`${base}/user/edit`, { para
 
 export const addUser = params => { return axios.get(`${base}/user/add`, { params: params }); };
 
+export const postRequest = (url, params) => {
+    return axios({
+      method: 'post',
+      url: `${url}`,
+      data: params,
+      transformRequest: [function (data) {
+        let ret = ''
+        for (let it in data) {
+          ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+        }
+        return ret
+      }],
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Bearer ' + window.localStorage.getItem('token') == null ? "": window.localStorage.getItem('token')
+      }
+    });
+  }
 
