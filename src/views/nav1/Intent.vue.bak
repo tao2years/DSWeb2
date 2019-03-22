@@ -1,0 +1,30 @@
+<template>
+    <el-row>
+        <br><br><br>
+        <el-col style="width: 40%">
+            <Intent_left></Intent_left>
+        </el-col>
+        <el-col style="width: 5%">
+            <br>
+        </el-col>
+        <el-col style="width: 55%">
+            <Intent_right></Intent_right>
+        </el-col>
+    </el-row>
+</template>
+
+<script>
+    import Intent_left from '../../components/Intent_left'
+    import Intent_right from '../../components/Intent_right'
+    export default{
+        name: 'intent',
+        components:{
+            "Intent_left": Intent_left,
+            "Intent_right":Intent_right
+        }
+    }
+</script>
+
+<style>
+  
+</style>

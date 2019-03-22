@@ -1,0 +1,16 @@
+<template>
+    <el-table>
+        
+    </el-table>
+</template>
+
+<script>
+import data from '@/assets/intent.json'
+export default {
+    data(){
+        return {
+            tabledata : data
+        }
+    }
+}
+</script>
