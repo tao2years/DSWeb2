@@ -42,6 +42,9 @@ let routes = [
             { path: '/table', component: Table, name: 'Table', hidden: true},
             { path: '/form', component: Form, name: 'Form', hidden: true},
             { path: '/user', component: user, name: '列表', hidden: true},
+            // { path: '/table', component: Table, name: 'Table'},
+            // { path: '/form', component: Form, name: 'Form'},
+            // { path: '/user', component: user, name: '列表'},
         ]
     },
     {

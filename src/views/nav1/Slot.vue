@@ -53,6 +53,21 @@
 				<el-form-item label="词槽描述" prop="Description">
 					<el-input type="textarea" v-model="addForm2.Description"></el-input>
 				</el-form-item>
+                <el-form-item label="词槽词典" prop="Dict">
+                    <el-upload
+                        class="upload-demo"
+                        action="https://jsonplaceholder.typicode.com/posts/"
+                        :before-upload="beforeUpload"
+                        :on-preview="handlePreview"
+                        :on-remove="handleRemove"
+                        :before-remove="beforeRemove"
+                        :on-exceed="handleExceed"
+                        :file-list="fileList">
+                        <el-button size="small" type="primary">点击上传</el-button>
+                        <div slot="tip" class="el-upload__tip">只能上传txt文件</div>
+                    </el-upload>
+					<!-- <el-input type="textarea" v-model="addForm2.Dict"></el-input> -->
+				</el-form-item>
 			</el-form>
 			<div slot="footer" class="dialog-footer">
 				<el-button @click.native="addForm2Visible = false">取消</el-button>
@@ -68,6 +83,7 @@ import data from '@/assets/intent.json'
 export default {
     data() {
         return {
+            fileList:[],
             filters: {
                 Cname: ''
             },
@@ -210,18 +226,40 @@ export default {
             }, response => {
                 console.log("error");
             });
-        }
+        },
+        handleRemove(file, fileList) {
+        console.log(file, fileList);
+        },
+        handlePreview(file) {
+            console.log(file);
+        },
+        handleExceed(files, fileList) {
+            this.$message.warning(`出错了`);
+        },
+        beforeRemove(file, fileList) {
+            return this.$confirm(`确定移除 ${ file.name }？`);
+        },
+        beforeUpload(file){
+            console.log(file.name)
+            let fd = new FormData();
+            fd.append('file',file);//传文件
+            fd.append('filename',file.name);//传文件
+            this.$http.post('apis/upload',fd).then(function(res){
+                console.log(res.data)
+            })
+        },
     },
     created(){
         // this.makeData()
         this.makeSerData()
-    },
-    // updated(){
-    //     console.log("updated")
-    // }
+    }
 }
 </script>
 
 <style scoped>
-
+.textarea-inherit {
+        width: 100%;
+        overflow: auto;
+        word-break: break-all; 
+    }
 </style>
