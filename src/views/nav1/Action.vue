@@ -56,7 +56,7 @@
 			</el-form>
 			<div slot="footer" class="dialog-footer">
 				<el-button @click.native="addForm3Visible = false">取消</el-button>
-				<el-button type="primary" @click.native="addSubmit" :loading="addLoading">提交</el-button>
+				<el-button type="primary" @click.native="addSubmit" :loading="addLoading3">提交</el-button>
 			</div>
 		</el-dialog>
 
@@ -90,7 +90,7 @@ export default {
                 Description: ''
             },
             addForm3Visible: false,//新增界面是否显示
-			addLoading: false,
+			addLoading3: false,
 			addForm3Rules: {
 				Cname: [
                     { required: true, message: '请输入行为名称', trigger: 'blur' }
@@ -181,7 +181,7 @@ export default {
 			this.$refs.addForm3.validate((valid)=>{
                 if (valid){
                     this.$confirm('确认提交吗？', '提示', {}).then(()=>{
-                        this.addLoading = true;
+                        this.addLoading3 = true;
                         let para = Object.assign({}, this.addForm3);
                         console.log(para)
                         this.addtLoading = false;
@@ -196,6 +196,7 @@ export default {
                         this.$refs['addForm3'].resetFields();
                         this.saveData()
                         console.log("save successs")
+                        this.addLoading3 = false;
                     }).catch(() => {
 
 				    })

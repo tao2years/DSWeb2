@@ -212,6 +212,7 @@ export default {
                         this.$refs['addForm2'].resetFields();
                         this.saveData()
                         console.log("save successs")
+                        this.addLoading2 = false;
                     }).catch(() => {
 
 				    })

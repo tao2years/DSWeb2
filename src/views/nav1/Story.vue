@@ -84,9 +84,17 @@
 			},
 			writedata: function(){
 				this.$confirm('确认提交吗？', '提示', {}).then(()=>{
-					this.content += "* "+this.form.intent
-					this.content += "{"+this.form.slot+"}"+"\n"
-					this.content += " -"+this.form.action+"\n"
+					if (this.form.intent != "")
+						this.content += "* "+this.form.intent
+					if (this.form.slot.length>0) {
+						this.content += "{"+this.form.slot+"}"+"\n";
+						for (var element in this.form.slot)
+							this.content += "    - slot{"+this.form.slot[element]+"}\n"
+					}
+					else
+						this.content += "\n"
+					if (this.form.action != "")
+						this.content += "    - "+this.form.action+"\n"
 					this.delContent();
 				})
 			},
@@ -103,7 +111,8 @@
 				this.$http.get('apis/getSlotData').then(response => {
 						for (var val in response.data) {
 							// console.log(response.data[val].Ename)
-							this.slotData.push(response.data[val].Ename)
+							var content = '"'+response.data[val].Ename+'": '+'""'
+							this.slotData.push(content)
 						}
 						// console.log(this.slotData)
 					}, response => {

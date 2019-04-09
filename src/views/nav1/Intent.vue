@@ -196,6 +196,7 @@ export default {
                         this.$refs['addForm'].resetFields();
                         this.saveData()
                         console.log("save successs")
+                        this.addLoading = false;
                     }).catch(() => {
 
 				    })
