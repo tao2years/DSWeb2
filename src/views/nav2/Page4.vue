@@ -55,6 +55,7 @@
       },
       beforeUpload(file){
             console.log(file.name)
+            console.log(file.url)
             let fd = new FormData();
             fd.append('file',file);//传文件
             fd.append('filename',file.name);//传文件

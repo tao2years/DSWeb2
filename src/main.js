@@ -14,8 +14,9 @@ Mock.bootstrap();
 import 'font-awesome/css/font-awesome.min.css'
 import axios from 'axios'
 import {postRequest} from './api/api'
+import Chat from 'vue-beautiful-chat'
 
-
+Vue.use(Chat)
 Vue.prototype.$axios = axios
 Vue.prototype.postRequest = postRequest;
 Vue.use(ElementUI)
