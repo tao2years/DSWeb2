@@ -15,7 +15,7 @@
     "element-ui": "^1.2.8",
     "font-awesome": "^4.7.0",
     "nprogress": "^0.2.0",
-    "vue": "^2.2.2",
+    "vue": "^2.7.7",
     "vue-beautiful-chat": "^2.2.0",
     "vue-resource": "^1.2.1",
     "vue-router": "^2.3.0",
